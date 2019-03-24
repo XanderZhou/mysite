@@ -1,0 +1,12 @@
+astroid==2.2.5
+certifi==2019.3.9
+Django==2.1.7
+django-bootstrap4==0.0.8
+isort==4.3.15
+lazy-object-proxy==1.3.1
+pipenv==2018.11.26
+pylint==2.3.1
+pytz==2018.9
+virtualenv==16.4.3
+virtualenv-clone==0.5.1
+wrapt==1.11.1

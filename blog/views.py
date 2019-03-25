@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from .models import Blog
+from .models import Blog, BlogType
 
 # Create your views here.
 
@@ -13,3 +13,9 @@ def blog_detail (request,pk):
     context = {}
     context['blog'] = get_object_or_404(Blog, id=pk)
     return render_to_response('blog_detail.html', context)
+
+def blog_with_type(request,blog_with_type):
+    context = {}
+    blog_type = get_object_or_404(BlogType, id=blog_with_type)
+    context['blogs'] = Blog.objects.filter(blog_type=blog_type)
+    render_to_response ('blogs_witch_type.html', context)

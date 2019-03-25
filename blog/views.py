@@ -6,16 +6,17 @@ from .models import Blog, BlogType
 def blog_list (request):
     context = {}
     context['blogs'] = Blog.objects.all()
-    return render_to_response('blog_list.html', context)
+    return render_to_response('blog/blog_list.html', context)
 
 
 def blog_detail (request,pk):
     context = {}
     context['blog'] = get_object_or_404(Blog, id=pk)
-    return render_to_response('blog_detail.html', context)
+    return render_to_response('blog/blog_detail.html', context)
 
-def blog_with_type(request,blog_with_type):
+def blog_with_type(request,blog_type_pk):
     context = {}
-    blog_type = get_object_or_404(BlogType, id=blog_with_type)
+    blog_type = get_object_or_404(BlogType, id=blog_type_pk)
     context['blogs'] = Blog.objects.filter(blog_type=blog_type)
-    render_to_response ('blogs_witch_type.html', context)
+    context['blog_type'] = blog_type
+    return render_to_response ('blog/blogs_witch_type.html', context)

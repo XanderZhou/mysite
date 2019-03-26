@@ -1,21 +1,38 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     <!-- <link rel="stylesheet" href="/static/css/base.css"> -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-3.37/css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.37/js/bootstrap.min.js' %}"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
-    <div class="nav">
-        <a class="logo" href="{% url 'home' %}">
-        <h3>个人网站</h3>
-        </a>
-        <a href="/">首页</a>
-        <a href="{% url 'blog_list' %}">博客</a>
-    </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container fluid">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="{% url 'home' %}">个人网站</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="{% block home_enable %}{% endblock %}"><a href="{% url 'home' %}">首页</a></li>
+                    <li class="{% block blog_enable %}{% endblock %}"><a href="{% url 'blog_list' %}">博客</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     {% block content %}{{% endblock %}
 </body>
 </html>

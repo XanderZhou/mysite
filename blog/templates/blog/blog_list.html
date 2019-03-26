@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+
+{% block title %}我的网站{% endblock %}
+
+{% load staticfiles %}
+{% block head %}<link rel="stylesheet" href="{% static 'blog/blog-type.css' %}">{% endblock %}
+
+{% block blog_enable %}active{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="co-xm-12 col-sm-8 col-md-9 col-lg-10">
+            {% for blog in blogs %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title"><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>
+                </div>
+                <div class="panel-body">
+                {{ blog.context|truncatechars:120 }}
+                </div>
+            </div>
+            {% empty %}
+            <p>-- 暂无博客，敬请期待 --</p>
+            {% endfor %}
+            <p>一共有{{ blogs|length}}篇博客</p>
+        </div>
+        <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">博客分类</h3>
+                </div>
+                <div class="panel-body">    
+                    <ul class="blog-type-list">
+                        {% for blog_type in blog_types %} 
+                        <li><a href="{% url 'blog_with_type' blog_type.pk %}">{{ blog_type.type_name }}</a></li>
+                        {% empty %}
+                        <li>-- 暂无分类，敬请期待 --</li>
+                        {% endfor %}
+                    </ul>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+ 

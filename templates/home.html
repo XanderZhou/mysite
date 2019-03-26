@@ -2,10 +2,15 @@
 
 {% load staticfiles %}
 
+
+{% block home_enable %}active{% endblock %}
+
+
 {% block title %}
 我的网站
 {% endblock %}
 
+{% load staticfiles %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}

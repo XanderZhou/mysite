@@ -3,30 +3,36 @@
 {% block title %}我的网站{% endblock %}
 
 {% load staticfiles %}
-{% block head %}<link rel="stylesheet" href="{% static 'blog/blog-type.css' %}">{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'blog/blog.css' %}">{% endblock %}
 
 {% block blog_enable %}active{% endblock %}
 
 {% block content %}
 
-
-
 <div class="container">
     <div class="row">
-        <div class="co-xm-12 col-sm-8 col-md-9 col-lg-10">
-            {% for blog in blogs %}
+        <div class="co-xm-12 col-sm-8 col-md-9 col-lg-10">   
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <h3 class="panel-title"><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>
+                <h3 class="panel-title">博客列表 (一共有{{ blogs|length }}篇博客)</h3>
                 </div>
                 <div class="panel-body">
-                {{ blog.context|truncatechars:120 }}
+                    {% for blog in blogs %}
+                    <div class="blog"> 
+                        <h3> <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>
+                        <p class="blog-info">
+                            <span class="glyphicon glyphicon-tag"></span><a href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a>
+                            <span class="glyphicon glyphicon-calendar"></span>发表日期：{{ blog.created_time|date:"Y-m-d H:n:s"}}
+                        </p>
+                        <p>{{ blog.context|truncatechars:120 }}</p>
+                    </div>
+                    {% empty %}
+                    <div class="blog">
+                        <h3>暂无博客，敬请期待</h3>
+                    </div>
+                        {% endfor %}
                 </div>
             </div>
-            {% empty %}
-            <p>-- 暂无博客，敬请期待 --</p>
-            {% endfor %}
-            <p>一共有{{ blogs|length}}篇博客</p>
         </div>
         <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
              <div class="panel panel-default">

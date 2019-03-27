@@ -13,3 +13,10 @@ div.blog h3 {
 /* div.blog p.blog-info {
     margin-bottom: 0;
 } */
+
+ul.blog_detail_description {
+    list-style-type:none
+}
+ul.blog_detail_description li {
+    display: inline-block;
+}
